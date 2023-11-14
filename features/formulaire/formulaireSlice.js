@@ -38,7 +38,6 @@ export const { setNom, setEmail, setTel, setMessage, setValidationError } =
   formulaireSlice.actions;
 export const validateEmail = (email) => {
   if (!emailRegex.test(email)) {
-    setValidationError({ field: "email", message: "Invalid email" });
     return false;
   }
   return true;
@@ -46,7 +45,6 @@ export const validateEmail = (email) => {
 
 export const validatePhoneNumber = (phoneNumber) => {
   if (!phoneNumberRegex.test(phoneNumber)) {
-    setValidationError({ field: "tel", message: "Invalid phone number" });
     return false;
   }
   return true;

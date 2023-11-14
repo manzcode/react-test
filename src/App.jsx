@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setNom, setEmail, setTel, setMessage,validateEmail, validatePhoneNumber } from '../features/formulaire/formulaireSlice';
+import { setNom, setEmail, setTel, setMessage,validateEmail, validatePhoneNumber,setValidationError } from '../features/formulaire/formulaireSlice';
 import { test } from '../features/formulaire/dataSlice';
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
       dispatch(test())
       // Envoyer le formulaire
     } else {
+      dispatch(setValidationError({ field: `${!isEmailValid ? "email" : !isPhoneNumberValid ? "tel" : "" }`, message: `${!isEmailValid ? "Invalid email" : !isPhoneNumberValid ? "Invalid phone number" : "" }`  }))
       setSubmitted(false);
       // Afficher les erreurs de validation
     }
@@ -68,13 +69,13 @@ function App() {
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
-        {submitted && errors.email && <span>{errors.email}</span>}
+        {errors.email && <span className='text-danger'>{errors.email}</span>}
       </Form.Group>
 
       <Form.Group controlId="formBasictel">
         <Form.Label>Téléphone</Form.Label>
         <Form.Control type="tel" placeholder="Téléphone" value={tel} onChange={handleTelChange} />
-        {submitted && errors.tel && <span>{errors.tel}</span>}
+        {errors.tel && <span className='text-danger'>{errors.tel}</span>}
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Message</Form.Label>
