@@ -6,7 +6,7 @@ export const formulaireSlice = createSlice({
     nom: "",
     email: "",
     tel: "",
-    messsage: "",
+    message: "",
     errors: {
       email: "",
       tel: "",
@@ -23,7 +23,7 @@ export const formulaireSlice = createSlice({
       state.tel = action.payload;
     },
     setMessage: (state, action) => {
-      state.messsage = action.payload;
+      state.message = action.payload;
     },
     setValidationError: (state, action) => {
       state.errors[action.payload.field] = action.payload.message;
